@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@362;400;600;800&display=swap');
+body{
+
+    font-family: 'Cairo', sans-serif !important;
+    background-color: #eee8e4;
+
+}
+.contact-img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
