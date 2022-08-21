@@ -10,14 +10,16 @@ let ContactList = ()=>{
         errorMessage :'some'
     });
 
-    useEffect(async()=> {
-        try{
-            let response = await ContactService.getAllContacts();
-            //  console.log(response.data)        
-        }
-        catch(error){
-
-        }
+    useEffect(()=> {        
+        ContactService.getAllContacts()
+        .then(response => {
+            setState({
+                loading: false,
+                contacts: response.data,
+                errorMessage: ''
+            });
+            console.log("contacts", state.contacts);
+        });        
     },  []);
 
 
@@ -58,23 +60,22 @@ let ContactList = ()=>{
             </section>
             <section className="contact-list">
                 <div className="container">
-                    <div className="row">
+                    <div className="row">                        
+                        {state.contacts.map((contact, index) => (
                         <div className="col-md-6">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="row align-items-center d-flex justify-content-around">
                                         <div className="col-md-4">
-                                            <img className="contact-img" src="https://www.w3schools.com/howto/img_avatar2.png" alt="avatar" />
+                                            <img className="contact-img" src={contact.photo} alt="avatar" />
                                         </div>
                                         <div className="col-md-7">
                                             <ul className="list-group">
                                             <li className="list-group-item list-group-item-action">
-                                                    الاسم: <span className="fw-bold">حسام عزب
-                                                    </span>
+                                                    الاسم: <span className="fw-bold">{contact.name}</span>
                                                     </li>
                                                     <li className="list-group-item list-group-item-action">
-                                                    موبايل : <span className="fw-bold">01015588467
-                                                    </span>
+                                                    موبايل : <span className="fw-bold">{contact.mobile}</span>
                                                 </li>
                                                 <li className="list-group-item list-group-item-action">
                                                     البريد: <span className="fw-bold">hosam@gmail.com
@@ -97,6 +98,7 @@ let ContactList = ()=>{
                                 </div>
                             </div>
                         </div>
+                        ))}                        
                     </div>
                 </div>
             </section>
